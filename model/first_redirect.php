@@ -1,4 +1,6 @@
 <?php
+	session_start();
+	
     $receivedFacebookCode = $_GET['code'];
 
     function getAccessToken($RFC) {
@@ -14,8 +16,8 @@
 	}	
 
 	$ontvangenJSON = getAccessToken($receivedFacebookCode);	
-	$eindResultaat = json_decode($ontvangenJSON);
-	$accessToken = $eindResultaat->access_token;	
+	$eindResultaat = json_decode($ontvangenJSON);	
+	$_SESSION['accesstoken'] = $eindResultaat->access_token;
 
     function getUserInfo($accessToken) {
          $graph_url = 'https://graph.facebook.com/me';
@@ -29,8 +31,8 @@
     }
 	
 	// gegevens ophalen met behulp van access token
-    $user = getUserInfo($accessToken);
-	header("Location: ../index.php?action=show_name_and_pic&gebruikersinfo=$user");
+    $_SESSION['userinfo'] = getUserInfo($_SESSION['accesstoken']);
+	header('Location: ../index.php?action=show_name_and_pic');
 
 	
 	

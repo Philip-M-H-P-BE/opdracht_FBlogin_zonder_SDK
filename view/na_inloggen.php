@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 	<head>
-		<title>Login via Facebook</title>
+		<title>Homepage Online Tutorials / na inloggen</title>
 		<meta charset="utf-8">
 		<meta name="keywords" content="">
 		<meta name="description" content="">
@@ -38,8 +38,8 @@
 			</nav>
 			<section>
 				<?php
-					$user = json_decode($info);
-					var_dump($user);
+					$user = json_decode($_SESSION['userinfo']);
+					// var_dump($user);
 					echo '<h1>Welkom!!!</h1>';
 					echo '<h2>Uw naam: ' . $user->name . '</h2>';
 					echo '<h2>Uw Facebook ID: ' . $user->id . '</h2>';
