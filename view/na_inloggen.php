@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 	<head>
-		<title>Homepage Online Tutorials / na inloggen</title>
+		<title>Homepage Online Tutorials / na het inloggen</title>
 		<meta charset="utf-8">
 		<meta name="keywords" content="">
 		<meta name="description" content="">

@@ -17,7 +17,7 @@ $context = stream_context_create([
 $result = file_get_contents($url, false, $context);
 $result = json_decode($result);
 
-/* indien geslaagd terug naar controller, websitebezoeker niet langer als ingelogd beschouwd */
+/* indien geslaagd terug naar controller index.php, websitebezoeker niet langer als ingelogd beschouwd */
 if($result->success == true) {
 	$_SESSION = array();
 	session_destroy();
