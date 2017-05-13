@@ -1,8 +1,20 @@
 <?php
 	session_start();
 	
-    $receivedFacebookCode = $_GET['code'];
-
+	
+	/* CODEBLOK I : ontvangen "Authorization Code" ophalen en in variabele opslaan */
+    if($_SERVER['REQUEST_METHOD'] == 'GET') {
+	    $receivedFacebookCode = $_GET['code'];
+	}
+	
+	
+	/* CODEBLOK II : 
+		II-a : een functie definiëren die we zullen aanroepen om
+		       een "Access Token" op te halen
+		II-b : de "Authorization Code" als argument meegeven bij het aanroepen van
+	           deze functie
+	*/
+	// II-a
     function getAccessToken($RFC) {
         $url = 'https://graph.facebook.com/v2.9/oauth/access_token';
         $data = ["client_id" => '829609807188888',
@@ -14,11 +26,21 @@
         $response = file_get_contents($getAddress);
 		return $response;         
 	}	
-
+	// II-b
 	$ontvangenJSON = getAccessToken($receivedFacebookCode);	
 	$eindResultaat = json_decode($ontvangenJSON);	
 	$_SESSION['accesstoken'] = $eindResultaat->access_token;
-
+	
+	
+	/* CODEBLOK III :
+		III-a : een functie definiëren die de gegevens van de ingelogde
+		        websitebezoeker ophaalt met behulp van het "Access Token"
+		III-b : deze functie aanroepen, het "Access Token" wordt als
+		        argument meegegeven; na ontvangst van de gegevens van de
+				websitebezoeker beschouwen we deze laatste als volledig 
+				ingelogd
+	*/
+	// III-a
     function getUserInfo($accessToken) {
          $graph_url = 'https://graph.facebook.com/me';
 		 $data = ["access_token" => $accessToken];
@@ -29,9 +51,11 @@
          }
          echo "mislukt!!!";
     }
-	
-	// gegevens ophalen met behulp van access token
+	// III-b
     $_SESSION['userinfo'] = getUserInfo($_SESSION['accesstoken']);
+	if (isset($_SESSION['userinfo'])) {
+		$_SESSION['bezitter_gegevens_ingelogd'] = true;
+	}
 	header('Location: ../index.php?action=show_name_and_pic');
 
 	

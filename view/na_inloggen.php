@@ -38,11 +38,14 @@
 			</nav>
 			<section>
 				<?php
-					$user = json_decode($_SESSION['userinfo']);
+					
 					// var_dump($user);
-					echo '<h1>Welkom!!!</h1>';
-					echo '<h2>Uw naam: ' . $user->name . '</h2>';
-					echo '<h2>Uw Facebook ID: ' . $user->id . '</h2>';
+					if($_SESSION['bezitter_gegevens_ingelogd'] === true) {
+						$user = json_decode($_SESSION['userinfo']);
+					    echo '<h1>Welkom!!!</h1>';
+					    echo '<h2>Uw naam: ' . $user->name . '</h2>';
+					    echo '<h2>Uw Facebook ID: ' . $user->id . '</h2>';
+					}
 				?>
 			</section>
 		</div>

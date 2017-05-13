@@ -19,21 +19,10 @@ switch ($action) {
 		include('./view/na_inloggen.php');
 		break;
 	case 'logout':
-		/*
-		var_dump($_SESSION['userinfo']);
-		*/
-		$_SESSION['userinfo'] = json_decode($_SESSION['userinfo']);
-		/*
-		var_dump($_SESSION['userinfo']);
-		var_dump($_SESSION['userinfo']->id);
-		var_dump($_SESSION['accesstoken']);
-		*/
-		$result = file_get_contents('https://graph.facebook.com/' . $_SESSION['userinfo']->id . '/permissions?access_token=' . $_SESSION['accesstoken'] . '&method=delete');
-		// var_dump($result);
-		include('./view/homepage.html');
-		$_SESSION = array();
-		session_destroy();
+		header('Location: ./model/revoke_granted_permissions.php');
 		break;
-		
+	case 'permissies_intrekken_geslaagd':
+		include('./view/homepage.html');
+		break;		
 }
 ?>
