@@ -57,10 +57,5 @@
 		$_SESSION['bezitter_gegevens_ingelogd'] = true;
 	}
 	header('Location: ../index.php?action=show_name_and_pic');
-
-	
-	
-	
-	
-
+	/* eindversie */
 ?>

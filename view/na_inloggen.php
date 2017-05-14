@@ -38,8 +38,6 @@
 			</nav>
 			<section>
 				<?php
-					
-					// var_dump($user);
 					if($_SESSION['bezitter_gegevens_ingelogd'] === true) {
 						$user = json_decode($_SESSION['userinfo']);
 					    echo '<h1>Welkom!!!</h1>';

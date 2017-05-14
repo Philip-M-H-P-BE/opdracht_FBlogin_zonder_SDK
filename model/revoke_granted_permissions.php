@@ -23,4 +23,5 @@ if($result->success == true) {
 	session_destroy();
 	header('Location: ../index.php?action=permissies_intrekken_geslaagd');
 }
+/* eindversie */
 ?>
